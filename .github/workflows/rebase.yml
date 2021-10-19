@@ -1,6 +1,7 @@
 on:
   issue_comment:
     types: [created]
+permissions: read-all|write-all
 jobs:
   rebase:
     timeout-minutes: 5
