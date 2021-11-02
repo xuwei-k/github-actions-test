@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -e
+set -o xtrace
 
 PR_NUMBER=$(jq -r ".pull_request.number" "$GITHUB_EVENT_PATH")
 if [[ "$PR_NUMBER" == "null" ]]; then
@@ -67,7 +68,6 @@ fi
 
 echo "Base branch for PR #$PR_NUMBER is $BASE_BRANCH"
 
-USER_TOKEN=${USER_LOGIN//-/_}_TOKEN
 COMMITTER_TOKEN="${APP_GITHUB_TOKEN}"
 
 git remote set-url origin "https://x-access-token:$COMMITTER_TOKEN@github.com/$GITHUB_REPOSITORY.git"
@@ -75,8 +75,6 @@ git config --global user.email "$USER_EMAIL"
 git config --global user.name "$USER_NAME"
 
 git remote add fork "https://x-access-token:$COMMITTER_TOKEN@github.com/$HEAD_REPO.git"
-
-set -o xtrace
 
 git fetch origin "$BASE_BRANCH"
 git fetch fork "$HEAD_BRANCH"
