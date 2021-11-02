@@ -22,14 +22,14 @@ fi
 
 echo "Collecting information about PR $PR_TITLE #$PR_NUMBER of $GITHUB_REPOSITORY..."
 
-if [[ -z "$GITHUB_TOKEN" ]]; then
-  echo "Set the GITHUB_TOKEN env variable."
+if [[ -z "$APP_GITHUB_TOKEN" ]]; then
+  echo "Set the APP_GITHUB_TOKEN env variable."
   exit 1
 fi
 
 URI=https://api.github.com
 API_HEADER="Accept: application/vnd.github.v3+json"
-AUTH_HEADER="Authorization: token $GITHUB_TOKEN"
+AUTH_HEADER="Authorization: token $APP_GITHUB_TOKEN"
 
 pr_resp=$(curl -X GET -s -H "${AUTH_HEADER}" -H "${API_HEADER}" \
           "${URI}/repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER")
@@ -68,8 +68,7 @@ fi
 echo "Base branch for PR #$PR_NUMBER is $BASE_BRANCH"
 
 USER_TOKEN=${USER_LOGIN//-/_}_TOKEN
-UNTRIMMED_COMMITTER_TOKEN=${!USER_TOKEN:-$GITHUB_TOKEN}
-COMMITTER_TOKEN="$(echo -e "${UNTRIMMED_COMMITTER_TOKEN}" | tr -d '[:space:]')"
+COMMITTER_TOKEN="${APP_GITHUB_TOKEN}"
 
 git remote set-url origin "https://x-access-token:$COMMITTER_TOKEN@github.com/$GITHUB_REPOSITORY.git"
 git config --global user.email "$USER_EMAIL"

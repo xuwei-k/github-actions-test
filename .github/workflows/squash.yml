@@ -31,6 +31,12 @@ jobs:
       env:
         JOB_CONTEXT: ${{ toJson(job) }}
       run: echo "$JOB_CONTEXT"
+    - id: generate_token
+      if: ${{ !github.event.repository.fork }}
+      uses: tibdex/github-app-token@v1
+      with:
+        app_id: 89536
+        private_key: ${{ secrets.BOT_KEY }}
     - run: ./.github/squash.sh
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        APP_GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
