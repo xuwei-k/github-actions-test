@@ -87,4 +87,4 @@ COMMIT_MESSAGE+=$(git log --pretty=format:%B HEAD...HEAD^)
 git commit --amend -m "$COMMIT_MESSAGE" 
 
 # push back
-git push --force-with-lease fork "$BASE_BRANCH:$HEAD_BRANCH"
+git push --force-with-lease "https://x-access-token:$COMMITTER_TOKEN@github.com/$HEAD_REPO.git" "$BASE_BRANCH:$HEAD_BRANCH"
