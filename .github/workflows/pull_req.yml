@@ -30,5 +30,5 @@ jobs:
             title: "${{ github.event.inputs.pull_req_title }}"
           });
           console.log(result);
-          core.setOutput('pull_req_number', result.number);
+          core.setOutput('pull_req_number', result.data.number);
     - run: echo "${{ steps.create_pull_request.outputs.pull_req_number }}"
