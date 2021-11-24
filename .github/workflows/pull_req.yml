@@ -1,0 +1,26 @@
+name: aaa
+on:
+  workflow_dispatch:
+    inputs:
+      base_branch:
+        required: false
+        default: 'test-1'
+      head_branch:
+        required: false
+        default: 'test-2'
+jobs:
+  release-pull-req:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/github-script@v3
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          github.pulls.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            head: "${{ github.event.inputs.head_branch }}",
+            base: "${{ github.event.inputs.base_branch }}"
+          )
