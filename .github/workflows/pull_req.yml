@@ -23,4 +23,4 @@ jobs:
             repo: context.repo.repo,
             head: "${{ github.event.inputs.head_branch }}",
             base: "${{ github.event.inputs.base_branch }}"
-          )
+          });
