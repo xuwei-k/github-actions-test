@@ -18,7 +18,7 @@ jobs:
     timeout-minutes: 3
     steps:
     - run: echo job3
-  job-3:
+  job-4:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
