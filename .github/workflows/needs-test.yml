@@ -1,0 +1,25 @@
+on:
+  push:
+jobs:
+  job-1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+    - run: echo job1
+  job-2:
+    needs: job-1
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+    - run: echo job2
+  job-3:
+    needs: job-1
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+    - run: echo job3
+  job-3:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+    - run: echo job4
