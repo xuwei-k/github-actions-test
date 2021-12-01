@@ -1,0 +1,26 @@
+on:
+  push:
+env:
+  PATH_CACHE: /tmp/docker-img-arch
+jobs:
+  Tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: docker images
+      - id: cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.PATH_CACHE }}
+          key: constant-key
+      - if: steps.cache.outputs.cache-hit == 'true'
+        run: docker load --input "${PATH_MOUNT}/mysql"
+      - run: docker images
+      - name: pull from docker hub
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ${{ env.PATH_CACHE }}
+          docker pull mysql:5.6.51
+          docker save --output "${PATH_MOUNT}/mysql"
+      - run: docker run mysql:5.6.51
+      - run: docker images
