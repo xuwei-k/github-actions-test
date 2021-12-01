@@ -13,7 +13,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ env.PATH_CACHE }}
-          key: constant-key-2
+          key: constant-key-3
       - if: steps.cache.outputs.cache-hit == 'true'
         run: docker load --input "${PATH_CACHE}/mysql"
       - run: docker images
