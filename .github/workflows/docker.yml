@@ -22,6 +22,6 @@ jobs:
         run: |
           mkdir -p ${{ env.PATH_CACHE }}
           docker pull "${MYSQL_IMAGE}"
-          docker save --output "${PATH_MOUNT}/mysql" "${MYSQL_IMAGE}"
+          sudo docker save --output "${PATH_MOUNT}/mysql" "${MYSQL_IMAGE}"
       - run: docker run "${MYSQL_IMAGE}"
       - run: docker images
