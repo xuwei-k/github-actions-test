@@ -2,6 +2,7 @@ on:
   push:
 env:
   PATH_CACHE: /tmp/docker-img-arch
+  MYSQL_IMAGE: "mysql:5.6.51"
 jobs:
   Tests:
     runs-on: ubuntu-latest
@@ -20,7 +21,7 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
           mkdir -p ${{ env.PATH_CACHE }}
-          docker pull mysql:5.6.51
-          docker save --output "${PATH_MOUNT}/mysql"
-      - run: docker run mysql:5.6.51
+          docker pull "${MYSQL_IMAGE}"
+          docker save --output "${PATH_MOUNT}/mysql" "${MYSQL_IMAGE}"
+      - run: docker run "${MYSQL_IMAGE}"
       - run: docker images
