@@ -13,15 +13,15 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ env.PATH_CACHE }}
-          key: constant-key
+          key: constant-key-2
       - if: steps.cache.outputs.cache-hit == 'true'
-        run: docker load --input "${PATH_MOUNT}/mysql"
+        run: docker load --input "${PATH_CACHE}/mysql"
       - run: docker images
       - name: pull from docker hub
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
           mkdir -p ${{ env.PATH_CACHE }}
           docker pull "${MYSQL_IMAGE}"
-          sudo docker save --output "${PATH_MOUNT}/mysql" "${MYSQL_IMAGE}"
+          sudo docker save --output "${PATH_CACHE}/mysql" "${MYSQL_IMAGE}"
       - run: docker run "${MYSQL_IMAGE}" --version
       - run: docker images
