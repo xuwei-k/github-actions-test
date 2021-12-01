@@ -23,5 +23,6 @@ jobs:
           mkdir -p ${{ env.PATH_CACHE }}
           docker pull "${MYSQL_IMAGE}"
           sudo docker save --output "${PATH_CACHE}/mysql" "${MYSQL_IMAGE}"
+          sudo chmod -R 0755 "${PATH_CACHE}/mysql"
       - run: docker run "${MYSQL_IMAGE}" --version
       - run: docker images
