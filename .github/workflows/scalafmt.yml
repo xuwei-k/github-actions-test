@@ -1,0 +1,30 @@
+on:
+  issue_comment:
+    types: [created]
+jobs:
+  Scalafmt:
+    if: github.event.issue.pull_request && startsWith(github.event.comment.body, 'apply scalafmt')
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - run: git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: push
+      run: |
+        set -x
+        git rev-parse HEAD
+        git switch -c scalafmt/working_branch
+
+        git config --global user.email "github-actions@example.com"
+        git config --global user.name "github-actions"
+
+        echo "a" >> a.txt
+        git add *.scala **/*.scala
+
+        if git commit -m "[ci skip] Applied Scalafmt"; then
+          git push origin scalafmt/working_branch:${{ github.event.pull_request.head.ref }}
+          echo "::set-output name=pushed::true"
+        else
+          echo "::set-output name=pushed::false"
+        fi
