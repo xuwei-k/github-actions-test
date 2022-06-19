@@ -21,10 +21,6 @@ jobs:
       with:
         fetch-depth: 0
         ref: "${{ steps.get_pull_req_branch.outputs.HEAD_REF }}"
-        token: ${{ steps.generate_token.outputs.token }}
-    - run: git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: push
       run: |
         set -x
