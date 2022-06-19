@@ -32,7 +32,7 @@ jobs:
         git add a.txt
 
         if git commit -m "[ci skip] Applied Scalafmt"; then
-          git push origin scalafmt/working_branch:${{ steps.get_pull_req_branch.outputs.HEAD_REF }}
+          git push origin ${{ steps.get_pull_req_branch.outputs.HEAD_REF }}:${{ steps.get_pull_req_branch.outputs.HEAD_REF }}
           echo "::set-output name=pushed::true"
         else
           echo "::set-output name=pushed::false"
