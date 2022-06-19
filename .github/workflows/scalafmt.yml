@@ -20,7 +20,7 @@ jobs:
         git config --global user.name "github-actions"
 
         echo "a" >> a.txt
-        git add *.scala **/*.scala
+        git add a.txt
 
         if git commit -m "[ci skip] Applied Scalafmt"; then
           git push origin scalafmt/working_branch:${{ github.event.pull_request.head.ref }}
