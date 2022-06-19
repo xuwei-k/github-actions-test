@@ -6,7 +6,22 @@ jobs:
     if: github.event.issue.pull_request && startsWith(github.event.comment.body, 'apply scalafmt')
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/github-script@v6
+      id: get_pull_req_branch
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const response = await github.rest.pulls.get({
+            pull_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo
+          });
+          core.setOutput('HEAD_REF', response.data.head.ref);
     - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        ref: "${{ steps.get_pull_req_branch.outputs.HEAD_REF }}"
+        token: ${{ steps.generate_token.outputs.token }}
     - run: git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -14,8 +29,6 @@ jobs:
       run: |
         set -x
         git rev-parse HEAD
-        git switch -c scalafmt/working_branch
-
         git config --global user.email "github-actions@example.com"
         git config --global user.name "github-actions"
 
@@ -23,7 +36,7 @@ jobs:
         git add a.txt
 
         if git commit -m "[ci skip] Applied Scalafmt"; then
-          git push origin scalafmt/working_branch:${{ github.event.pull_request.head.ref }}
+          git push origin scalafmt/working_branch:${{ steps.get_pull_req_branch.outputs.HEAD_REF }}
           echo "::set-output name=pushed::true"
         else
           echo "::set-output name=pushed::false"
