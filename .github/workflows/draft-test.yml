@@ -1,8 +1,10 @@
 on:
   pull_request:
+
 jobs:
   test:
-    if: ! github.event.pull_request.draft
+    if: ${{ ! github.event.pull_request.draft }}
     runs-on: ubuntu-latest
+    timeout-minutes: 3
     steps:
     - run: echo hello
