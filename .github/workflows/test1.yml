@@ -6,4 +6,5 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
+    - run: echo '${{ github.workflow }}-${{ github.ref }}-${{ !startsWith(github.ref, 'refs/pull/') || github.run_number }}'
     - run: echo '${{ toJSON(github) }}'
