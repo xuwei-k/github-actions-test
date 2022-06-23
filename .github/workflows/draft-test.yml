@@ -13,4 +13,6 @@ jobs:
     timeout-minutes: 3
     steps:
     - run: echo hello
+    - run: sleep 70
+      timeout-minutes: 1
     - run: echo '${{ toJSON(github) }}'
