@@ -1,0 +1,12 @@
+on:
+  workflow_run:
+    workflows:
+      - dispatch_test_1
+    types:
+      - completed
+
+jobs:
+  aaaaa:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{github.event.workflow_run.conclusion}}
