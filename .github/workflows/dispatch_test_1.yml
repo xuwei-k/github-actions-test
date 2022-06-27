@@ -5,7 +5,6 @@ name: dispatch_test_1
 
 jobs:
   buildParams:
-    if: startsWith(github.head_ref, 'hotfix/')
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
