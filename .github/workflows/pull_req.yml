@@ -1,34 +1,9 @@
 name: aaa
 on:
   workflow_dispatch:
-    inputs:
-      base_branch:
-        required: false
-        default: 'main'
-      head_branch:
-        required: false
-        default: 'test-1'
-      pull_req_title:
-        required: false
-        default: 'リリース'        
 jobs:
   release-pull-req:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-    - uses: actions/checkout@v2
-    - id: create_pull_request
-      uses: actions/github-script@v3
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-          const result = await github.pulls.create({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            head: "${{ github.event.inputs.head_branch }}",
-            base: "${{ github.event.inputs.base_branch }}",
-            title: "${{ github.event.inputs.pull_req_title }}"
-          });
-          console.log(result);
-          core.setOutput('pull_req_number', result.data.number);
-    - run: echo "${{ steps.create_pull_request.outputs.pull_req_number }}"
+    - run: echo '${{ toJSON(github) }}'
