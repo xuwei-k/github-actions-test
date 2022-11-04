@@ -1,10 +1,14 @@
 on:
-  pull_request:
+  push:
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 10
     steps:
-    - if: github.event.actions == 'synchronize' || github.event.actions == 'reopened'
-      run: echo '${{ toJSON(github) }}'
+    - uses: actions/checkout@v3
+    - uses: actions/setup-java@v3
+      with:
+        java-version: 11
+        distribution: corretto
+    - run: sbt run
