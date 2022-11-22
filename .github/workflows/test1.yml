@@ -1,5 +1,5 @@
 on:
-  push:
+  pull_request:
 
 jobs:
   test:
@@ -7,8 +7,16 @@ jobs:
     timeout-minutes: 10
     steps:
     - uses: actions/checkout@v3
-    - uses: actions/setup-java@v3
+    - uses: actions/github-script@v6
       with:
-        java-version: 11
-        distribution: corretto
-    - run: sbt run
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const response = await github.rest.pulls.listFiles({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            pull_number: context.issue.number
+          });
+          console.log(response.data);
+          const files = response.data.filter(f => f.filename.endsWith(".yml"));
+          console.log(files);
+          console.log(files.map(f => f.filename).join("\n"));
