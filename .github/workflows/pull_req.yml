@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-    - uses: actions/checkout@e2f20e631ae6d7dd3b768f56a5d2af784dd54791 # v2
+    - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
     - id: create_pull_request
       uses: actions/github-script@v3
       with:
