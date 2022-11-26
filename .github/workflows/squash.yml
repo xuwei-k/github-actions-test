@@ -25,7 +25,7 @@ jobs:
       with:
         app_id: 89536
         private_key: ${{ secrets.BOT_KEY }}
-    - uses: actions/checkout@dcd71f646680f2efd8db4afa5ad64fdcba30e748
+    - uses: actions/checkout@e2f20e631ae6d7dd3b768f56a5d2af784dd54791 # v2
       with:
         fetch-depth: 0
         ref: "${{ steps.get_pull_req_branch.outputs.HEAD_REF }}"
