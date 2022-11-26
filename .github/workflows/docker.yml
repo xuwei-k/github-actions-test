@@ -7,10 +7,10 @@ jobs:
   Tests:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@937d24475381cd9c75ae6db12cb4e79714b926ed # v2
+      - uses: actions/checkout@v2
       - run: docker images
       - id: cache
-        uses: actions/cache@v2
+        uses: actions/cache@937d24475381cd9c75ae6db12cb4e79714b926ed # v2
         with:
           path: ${{ env.PATH_CACHE }}
           key: constant-key-3
