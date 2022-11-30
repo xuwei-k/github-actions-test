@@ -7,5 +7,5 @@ jobs:
     timeout-minutes: 3
     steps:
     - run: aaaaaaa
-    - if: always() && (github.event_name == 'pull')
+    - if: always() && (github.event_name == 'push')
       run: echo bbbbbb
