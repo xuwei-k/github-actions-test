@@ -1,10 +1,11 @@
 on:
-  pull_request:
+  push:
 
 jobs:
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
-    - if: github.event.actions == 'synchronize' || github.event.actions == 'reopened'
-      run: echo '${{ toJSON(github) }}'
+    - run: aaaaaaa
+    - if: always() && (github.event_name == 'pull')
+      run: echo bbbbbb
