@@ -20,6 +20,6 @@ jobs:
         script: |
           const script = require(`${process.env.GITHUB_WORKSPACE}/.github/check-rebase-branch.js`)
           console.log(script({github, context}))
-    - uses: cirrus-actions/rebase@7e3fc92f1b6a4d19f607d5cb3d70ce8a1ec13b1c
+    - uses: cirrus-actions/rebase@50007412be906b9cc222db3dfc469f325031f1b2
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
