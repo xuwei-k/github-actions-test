@@ -29,7 +29,7 @@ jobs:
             repo: context.repo.repo,
             tag: ${{ steps.tag_name.outputs.value }},
             message: "aaa",
-            object: "${{ context.sha }}",
+            object: "${{ github.sha }}",
             type: "commit",
             tagger: {
               name: "xuwei-k-bot[bot]",
