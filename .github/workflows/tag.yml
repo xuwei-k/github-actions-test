@@ -29,10 +29,10 @@ jobs:
             repo: context.repo.repo,
             tag: ${{ steps.tag_name.outputs.value }},
             message: "",
-            object: "${ env.GITHUB_SHA }",
+            object: context.sha,
             type: "commit",
             tagger: {
-              name: "aaaa",
-              email: "74843977+scalaz-bot[bot]@users.noreply.github.com"
+              name: "xuwei-k-bot[bot]",
+              email: "74788111+xuwei-k-bot[bot]@users.noreply.github.com"
             }
-          );
+          });
