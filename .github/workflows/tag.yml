@@ -1,0 +1,32 @@
+on:
+  push:
+    branches:
+      - create-tag-test
+jobs:
+  create-tag:
+    env:
+      TZ: "Asia/Tokyo"
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - id: tag_name
+      run: |
+        TAG_NAME=`date '+%Y-%m-%d'`-`echo ${GITHUB_SHA} | cut -c 1-8`
+        echo "${TAG_NAME}"
+        echo "value=${TAG_NAME}" >> $GITHUB_OUTPUT
+    - uses: actions/github-script@v6
+      with:
+        script: |
+          github.rest.git.createTag({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            tag: ${{ steps.tag_name.outputs.value }},
+            message: "",
+            object: "${ env.GITHUB_SHA }",
+            type: "commit",
+            tagger: {
+              name: "aaaa",
+              email: "74843977+scalaz-bot[bot]@users.noreply.github.com"
+            }
+          );
