@@ -17,6 +17,7 @@ jobs:
         echo "value=${TAG_NAME}" >> $GITHUB_OUTPUT
     - uses: actions/github-script@v6
       with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
           github.rest.git.createTag({
             owner: context.repo.owner,
