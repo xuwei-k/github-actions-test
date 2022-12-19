@@ -40,6 +40,6 @@ jobs:
           github.rest.git.createRef({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            ref: "refs/tags/${{github.event.head_commit.message}}",
+            ref: "refs/tags/${{ steps.tag_name.outputs.value }}",
             sha: "${{ github.sha }}"
           });
