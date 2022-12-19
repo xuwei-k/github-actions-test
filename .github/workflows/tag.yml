@@ -24,7 +24,7 @@ jobs:
       with:
         github-token: ${{ steps.generate_token.outputs.token }}
         script: |
-          github.rest.git.createTag({
+          const res = await github.rest.git.createTag({
             owner: context.repo.owner,
             repo: context.repo.repo,
             tag: "${{ steps.tag_name.outputs.value }}",
@@ -36,3 +36,4 @@ jobs:
               email: "74788111+xuwei-k-bot[bot]@users.noreply.github.com"
             }
           });
+          console.log(res);
