@@ -1,5 +1,5 @@
 on:
-  unlabeled:
+  pull_request:
     types:
     - unlabeled
 jobs:
