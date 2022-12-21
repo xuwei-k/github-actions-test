@@ -7,7 +7,7 @@ jobs:
     if: github.event.issue.pull_request != '' && github.event.comment.body == '/squash'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/github-script@v3.1.0
+    - uses: actions/github-script@v6
       id: get_pull_req_branch
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
