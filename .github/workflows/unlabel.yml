@@ -1,0 +1,10 @@
+on:
+  issue:
+    types:
+    - unlabeled
+jobs:
+  when_unlabeled:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+    - run: echo '${{ github.event }}'
