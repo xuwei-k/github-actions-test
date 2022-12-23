@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
       - run: docker images
       - id: cache
-        uses: actions/cache@c17f4bf4666a8001b1a45c09eb7a485c41aa64c3 # v2
+        uses: actions/cache@c17f4bf4666a8001b1a45c09eb7a485c41aa64c3 # v3.2.0
         with:
           path: ${{ env.PATH_CACHE }}
           key: constant-key-3
