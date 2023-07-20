@@ -20,7 +20,7 @@ jobs:
             }
           }`;
           const variables = {
-            id: ${{ context.issue.node_id }}
+            id: context.issue.node_id
           }
           const result = await github.graphql(query, variables)
           console.log(result)
