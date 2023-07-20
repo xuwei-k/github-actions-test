@@ -9,6 +9,7 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
+          console.log(context);
           const query = `
             mutation($id: ID!) {
               markPullRequestReadyForReview(input: { pullRequestId: $id }) {
