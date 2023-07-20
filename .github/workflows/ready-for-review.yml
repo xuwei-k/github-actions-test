@@ -1,16 +1,14 @@
 on:
   pull_request:
 
-permissions:
-  id-token: write
-  contents: write
-  checks: write
-  pull-requests: write
-  actions: read
-
 jobs:
   ready-for-review:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      checks: write
+      pull-requests: write
+      actions: read
     steps:
     - uses: actions/github-script@v6
       with:
