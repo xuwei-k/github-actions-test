@@ -9,10 +9,6 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
-          console.log(context);
-          console.log(github);
-          console.log(context.pull_request.node_id);
-          console.log(github.event.pull_request.node_id);
           const query = `
             mutation($id: ID!) {
               markPullRequestReadyForReview(input: { pullRequestId: $id }) {
