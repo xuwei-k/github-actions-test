@@ -19,7 +19,7 @@ jobs:
             }
           `;
           const variables = {
-            id: context.pull_request.node_id
+            id: context.payload.pull_request.node_id
           }
           const result = await github.graphql(query, variables)
           console.log(result)
