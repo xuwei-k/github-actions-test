@@ -10,6 +10,9 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
           console.log(context);
+          console.log(github);
+          console.log(context.pull_request.node_id);
+          console.log(github.event.pull_request.node_id);
           const query = `
             mutation($id: ID!) {
               markPullRequestReadyForReview(input: { pullRequestId: $id }) {
@@ -20,7 +23,7 @@ jobs:
             }
           `;
           const variables = {
-            id: context.pull_request.node_id
+            id: github.event.pull_request.node_id
           }
           const result = await github.graphql(query, variables)
           console.log(result)
