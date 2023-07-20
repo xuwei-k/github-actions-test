@@ -3,10 +3,10 @@ on:
 
 permissions:
   id-token: write
-  contents: read
+  contents: write
   checks: write
   pull-requests: write
-  actions: write
+  actions: read
 
 jobs:
   ready-for-review:
