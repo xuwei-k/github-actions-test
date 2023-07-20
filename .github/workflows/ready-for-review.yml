@@ -1,0 +1,26 @@
+on:
+  pull_request:
+
+jobs:
+  ready-for-review:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/github-script@v6
+      with:
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const query = `
+            mutation($id: ID!) {
+              markPullRequestReadyForReview(input: { pullRequestId: $id }) {
+                pullRequest {
+                  id
+                }
+              }
+            }
+          }`;
+          const variables = {
+            id: ${{ context.issue.node_id }}
+          }
+          const result = await github.graphql(query, variables)
+          console.log(result)
