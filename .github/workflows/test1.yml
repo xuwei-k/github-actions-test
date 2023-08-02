@@ -14,8 +14,13 @@ jobs:
     needs: test1
     runs-on: ubuntu-latest
     timeout-minutes: 1
+    strategy:
+      matrix:
+        include:
+        - test_index: 0
+        - test_index: 1
     steps:
-    - run: echo 2
+    - run: echo "${{matrix.test_index}}"
   test3:
     needs: test2
     runs-on: ubuntu-latest
