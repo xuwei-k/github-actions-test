@@ -1,7 +1,8 @@
 on:
   pull_request:
   push:
-  - main
+    branches:
+    - main
 
 jobs:
   test1:
@@ -16,7 +17,7 @@ jobs:
     steps:
     - run: echo 2
   test3:
-    needs: test1
+    needs: test2
     runs-on: ubuntu-latest
     timeout-minutes: 1
     steps:
