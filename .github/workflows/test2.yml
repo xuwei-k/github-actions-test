@@ -1,0 +1,17 @@
+on:
+  pull_request:
+  push:
+    branches:
+    - main
+
+jobs:
+  test2:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    strategy:
+      matrix:
+        include:
+        - test_index: 0
+        - test_index: 1
+    steps:
+    - run: echo "${{matrix.test_index}}"
