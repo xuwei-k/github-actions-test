@@ -1,5 +1,7 @@
 on:
   push:
+    branches:
+    - aaaaaaaaa
 env:
   PATH_CACHE: /tmp/docker-img-arch
   MYSQL_IMAGE: "mysql:5.6.51"
