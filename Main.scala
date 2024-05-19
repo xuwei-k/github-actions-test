@@ -1,7 +1,7 @@
 object Main {
   def main(args: Array[String]): Unit = {
-    println(sys.env.get("GITHUB_STEP_SUMMARY"))
-    sys.process.Process(Seq("/bin/bash", "echo foo >> $GITHUB_STEP_SUMMARY")).!
-    println(sys.env.get("GITHUB_STEP_SUMMARY"))
+    val f = new java.io.File(sys.env("GITHUB_STEP_SUMMARY"))
+    println(f.isFile)
+    java.nio.file.Files.writeString(f.toPath, "aaa")
   }
 }
