@@ -12,3 +12,5 @@ jobs:
         java-version: 17
         distribution: adopt
     - run: sbt run
+    - run: echo bar >> $GITHUB_STEP_SUMMARY
+    - run: echo $GITHUB_STEP_SUMMARY
