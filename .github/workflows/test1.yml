@@ -1,29 +1,14 @@
 on:
-  pull_request:
   push:
-    branches:
-    - main
 
 jobs:
-  test1:
+  test:
     runs-on: ubuntu-latest
-    timeout-minutes: 1
+    timeout-minutes: 10
     steps:
-    - run: echo 1
-  test2:
-    needs: test1
-    runs-on: ubuntu-latest
-    timeout-minutes: 1
-    strategy:
-      matrix:
-        include:
-        - test_index: 0
-        - test_index: 1
-    steps:
-    - run: echo "${{matrix.test_index}}"
-  test3:
-    needs: test2
-    runs-on: ubuntu-latest
-    timeout-minutes: 1
-    steps:
-    - run: echo 3
+    - uses: actions/checkout@v4
+    - uses: actions/setup-java@v4
+      with:
+        java-version: 17
+        distribution: adopt
+    - run: sbt run
