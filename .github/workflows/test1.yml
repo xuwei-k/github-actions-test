@@ -6,4 +6,4 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 1
     steps:
-    - run: echo "::warning title=あああああああ"
+    - run: echo "::warning title=あああああああ::"
