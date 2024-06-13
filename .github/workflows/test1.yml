@@ -1,29 +1,9 @@
 on:
-  pull_request:
   push:
-    branches:
-    - main
 
 jobs:
   test1:
     runs-on: ubuntu-latest
     timeout-minutes: 1
     steps:
-    - run: echo 1
-  test2:
-    needs: test1
-    runs-on: ubuntu-latest
-    timeout-minutes: 1
-    strategy:
-      matrix:
-        include:
-        - test_index: 0
-        - test_index: 1
-    steps:
-    - run: echo "${{matrix.test_index}}"
-  test3:
-    needs: test2
-    runs-on: ubuntu-latest
-    timeout-minutes: 1
-    steps:
-    - run: echo 3
+    - run: echo "::warning title=あああああああ"
