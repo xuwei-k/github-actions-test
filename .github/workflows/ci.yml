@@ -1,0 +1,21 @@
+on:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-java@v4
+      with:
+        java-version: 21
+        distribution: adopt
+    - uses: reviewdog/action-setup@v1
+      with:
+        reviewdog_version: latest
+    - run: sbt -v compile | tee compile.log
+    - env:
+        REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        cat compile.log | sed $'s,\x1b\\[[0-9;]*[a-zA-Z],,g' > compile_escaped.log
+        cat compile_escaped.log reviewdog -reporter=github-pr-review -f=sbt-scalastyle
