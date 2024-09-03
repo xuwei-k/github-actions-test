@@ -16,7 +16,7 @@ object DiagnosticResult {
           message = w.message,
           location = Location(
             path = {
-              val prefix = "${BASE}/"
+              val prefix = "${BASE}"
               w.position.sourcePath match {
                 case Some(value) =>
                   if (value.startsWith(prefix) ) {
