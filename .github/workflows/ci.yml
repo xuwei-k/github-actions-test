@@ -13,10 +13,7 @@ jobs:
     - uses: reviewdog/action-setup@v1
       with:
         reviewdog_version: latest
-    - run: sbt -v compile | tee compile.log
-    - run: cat compile.log
-    - run: cat compile.log | sed $'s,\x1b\\[[0-9;]*[a-zA-Z],,g' > compile_escaped.log
-    - run: cat compile_escaped.log
+    - run: sbt -v warningsReviewdogDiagnosticFormat
     - env:
         REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: cat compile_escaped.log | reviewdog -reporter=github-pr-review -f=sbt-scalastyle
+      run: cat warnings.json | reviewdog -reporter=github-pr-review -f=rdjson

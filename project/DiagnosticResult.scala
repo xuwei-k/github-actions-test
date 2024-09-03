@@ -15,7 +15,19 @@ object DiagnosticResult {
         Diagnostic(
           message = w.message,
           location = Location(
-            path = w.position.sourcePath.getOrElse(""),
+            path = {
+              val prefix = "${BASE}/"
+              w.position.sourcePath match {
+                case Some(value) =>
+                  if (value.startsWith(prefix) ) {
+                    value.drop(prefix.length)
+                  } else {
+                    value
+                  }
+                case None =>
+                  ""
+              }
+            },
             range = Range(
               line = w.position.line,
               column = w.position.startColumn
