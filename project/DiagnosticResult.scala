@@ -2,6 +2,7 @@ package warning_diff.rdf
 
 import sjsonnew.BasicJsonProtocol.*
 import sjsonnew.JsonFormat
+import java.io.File
 
 case class DiagnosticResult(
   diagnostics: Seq[Diagnostic],
@@ -19,10 +20,11 @@ object DiagnosticResult {
               val prefix = "${BASE}"
               w.position.sourcePath match {
                 case Some(value) =>
+                  val dir = new File(".").getCanonicalPath
                   if (value.startsWith(prefix) ) {
-                    value.drop(prefix.length)
+                    s"$dir${value.drop(prefix.length)}"
                   } else {
-                    value
+                    s"$dir$value"
                   }
                 case None =>
                   ""
