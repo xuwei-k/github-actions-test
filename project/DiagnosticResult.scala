@@ -2,12 +2,14 @@ package warning_diff.rdf
 
 import sjsonnew.BasicJsonProtocol.*
 import sjsonnew.JsonFormat
-import java.io.File
+import warning_diff.JsonClassOps._
 
 case class DiagnosticResult(
   diagnostics: Seq[Diagnostic],
   source: Option[Source]
-)
+){
+  override def toString = this.toJsonString
+}
 
 object DiagnosticResult {
   def fromWarnings(values: Seq[warning_diff.Warning]): DiagnosticResult =
@@ -20,7 +22,6 @@ object DiagnosticResult {
               val prefix = "${BASE}/"
               w.position.sourcePath match {
                 case Some(value) =>
-                  // val dir = new File(".").getCanonicalPath
                   if (value.startsWith(prefix) ) {
                     value.drop(prefix.length)
                   } else {
@@ -41,10 +42,14 @@ object DiagnosticResult {
               )
             )
           ),
-          severity = None
+          severity = Some("WARNING")
         )
       },
-      source = None
+      source = Some(
+        Source(
+          name = "scala"
+        )
+      )
     )
 
   implicit val instance: JsonFormat[DiagnosticResult] =

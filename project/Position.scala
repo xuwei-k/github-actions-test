@@ -2,11 +2,14 @@ package warning_diff.rdf
 
 import sjsonnew.BasicJsonProtocol._
 import sjsonnew.JsonFormat
+import warning_diff.JsonClassOps._
 
 case class Position(
   line: Option[Int],
   column: Option[Int]
-)
+){
+  override def toString = this.toJsonString
+}
 
 object Position{
   implicit val instance: JsonFormat[Position] =
