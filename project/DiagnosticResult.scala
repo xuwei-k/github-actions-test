@@ -17,14 +17,14 @@ object DiagnosticResult {
           message = w.message,
           location = Location(
             path = {
-              val prefix = "${BASE}"
+              val prefix = "${BASE}/"
               w.position.sourcePath match {
                 case Some(value) =>
-                  val dir = new File(".").getCanonicalPath
+                  // val dir = new File(".").getCanonicalPath
                   if (value.startsWith(prefix) ) {
-                    s"$dir${value.drop(prefix.length)}"
+                    value.drop(prefix.length)
                   } else {
-                    s"$dir$value"
+                    value
                   }
                 case None =>
                   ""
@@ -41,14 +41,10 @@ object DiagnosticResult {
               )
             )
           ),
-          severity = Some(Severity.Warning)
+          severity = None
         )
       },
-      source = Some(
-        Source(
-          name = "Scala"
-        )
-      )
+      source = None
     )
 
   implicit val instance: JsonFormat[DiagnosticResult] =
