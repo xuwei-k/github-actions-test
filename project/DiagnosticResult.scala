@@ -1,5 +1,8 @@
 package warning_diff.rdf
 
+import sjsonnew.BasicJsonProtocol.*
+import sjsonnew.JsonFormat
+
 case class DiagnosticResult(
   diagnostics: Seq[Diagnostic],
   source: Option[Source]
@@ -26,5 +29,11 @@ object DiagnosticResult {
           name = "Scala"
         )
       )
+    )
+
+  implicit val instance: JsonFormat[DiagnosticResult] =
+    caseClass2(apply, unapply)(
+      "diagnostics",
+      "source"
     )
 }
