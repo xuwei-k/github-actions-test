@@ -4,14 +4,14 @@ import sjsonnew.BasicJsonProtocol.*
 import sjsonnew.JsonFormat
 
 case class Range(
-  line: Option[Int],
-  column: Option[Int]
+    start: Position,
+    end: Position,
 )
 
 object Range {
   implicit val instance: JsonFormat[Range] =
     caseClass2(apply, unapply)(
-      "line",
-      "column"
+      "start",
+      "end"
     )
 }

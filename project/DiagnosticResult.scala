@@ -31,8 +31,14 @@ object DiagnosticResult {
               }
             },
             range = Range(
-              line = w.position.line,
-              column = w.position.startColumn
+              start = Position(
+                line = w.position.startLine,
+                column = w.position.startColumn
+              ),
+              end = Position(
+                line = w.position.endLine,
+                column = w.position.endColumn
+              )
             )
           ),
           severity = Some(Severity.Warning)
