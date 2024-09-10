@@ -2,7 +2,7 @@
   "diagnostics": [{
     "message": "method mapValues in trait MapOps is deprecated since 2.13.0: Use .view.mapValues(f). A future version will include a strict version of this method (for now, .view.mapValues(f).toMap).",
     "location": {
-      "path": "X.scala",
+      "path": "ABC.scala",
       "range": {
         "start": {
           "line": 4,
