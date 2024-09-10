@@ -1,0 +1,36 @@
+{
+  "diagnostics": [{
+    "message": "method mapValues in trait MapOps is deprecated since 2.13.0: Use .view.mapValues(f). A future version will include a strict version of this method (for now, .view.mapValues(f).toMap).",
+    "location": {
+      "path": "X.scala",
+      "range": {
+        "start": {
+          "line": 4,
+          "column": 28
+        },
+        "end": {
+          "line": 4
+        }
+      }
+    },
+    "severity": "WARNING"
+  }, {
+    "message": "method + in class Int is deprecated since 2.13.0: Adding a number and a String is deprecated. Use the string interpolation `s\"$num$str\"`",
+    "location": {
+      "path": "src/main/scala/Y.scala",
+      "range": {
+        "start": {
+          "line": 4,
+          "column": 10
+        },
+        "end": {
+          "line": 4
+        }
+      }
+    },
+    "severity": "WARNING"
+  }],
+  "source": {
+    "name": "scala"
+  }
+}
