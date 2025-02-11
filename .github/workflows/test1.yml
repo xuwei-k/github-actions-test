@@ -4,8 +4,8 @@ on:
 jobs:
   test1:
     runs-on: ubuntu-latest
-    timeout-minutes: 1
+    timeout-minutes: 3
     steps:
-    - run: |
-        wget https://repo1.maven.org/maven2/org/scala-lang/scala3-compiler_3/maven-metadata.xml
-        xmllint --xpath "/metadata/versioning/latest/text()" maven-metadata.xml
+    - run: sudo apt-get install -y libxml2-utils
+    - run: wget https://repo1.maven.org/maven2/org/scala-lang/scala3-compiler_3/maven-metadata.xml
+    - run: xmllint --xpath "/metadata/versioning/latest/text()" maven-metadata.xml
