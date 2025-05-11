@@ -4,9 +4,11 @@ on:
 jobs:
   test1:
     runs-on: ubuntu-latest
-    timeout-minutes: 1
-    if: ${{ !startsWith(github.context.payload.pull_request.title, '[2.x]') && (github.context.payload.pull_request.base.ref == 'main') }}
+    timeout-minutes: 3
+    #if: ${{ !startsWith(github.context.payload.pull_request.title, '[2.x]') && (github.context.payload.pull_request.base.ref == 'main') }}
     steps:
+    - run: echo ${{github.context.payload.pull_request.title}}
+    - run: echo ${{github.context.payload.pull_request.base.ref}}
     - uses: actions/github-script@v7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
