@@ -7,8 +7,8 @@ jobs:
     timeout-minutes: 1
     steps:
     - run: |
-        echo "```diff" >> $GITHUB_STEP_SUMMARY
-        echo "foo : {" >> $GITHUB_STEP_SUMMARY
-        echo "},"      >> $GITHUB_STEP_SUMMARY
-        echo ""        >> $GITHUB_STEP_SUMMARY
-        echo "```"     >> $GITHUB_STEP_SUMMARY
+        echo "\`\`\`diff" >> $GITHUB_STEP_SUMMARY
+        echo "foo : {"    >> $GITHUB_STEP_SUMMARY
+        echo "},"         >> $GITHUB_STEP_SUMMARY
+        echo ""           >> $GITHUB_STEP_SUMMARY
+        echo "\`\`\`"     >> $GITHUB_STEP_SUMMARY
